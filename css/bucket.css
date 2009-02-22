@@ -1,0 +1,178 @@
+/**
+ *
+ */
+.theme-bucket {
+    background: #222;
+    font: 14px Georgia;
+    line-height: 1.45em;
+}
+.theme-bucket #wrapper {
+    margin: 0 auto 0 auto;
+    width: 510px;
+    background: #fefefe;
+}
+.theme-bucket #header {
+    background: #222 url(../img/growup.jpg) no-repeat 150px bottom;
+    height: 141px;
+}
+.theme-bucket #header a {
+    text-decoration: none;
+}
+.theme-bucket #header .title {
+    background: transparent url(../img/heeed9.jpg) no-repeat left bottom;
+    height: 141px;
+    font-family: monospace;
+    line-height: 1em;
+    text-align: center;
+    color: #ccc;
+    font-size: 150%;
+    font-weight: normal;
+    text-decoration: none;
+}
+.theme-bucket #content {
+    position: relative;
+}
+.theme-bucket .pagination {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background: #222;
+    font-family: monospace;
+    height: 2em;
+}
+.theme-bucket .pagination li {
+    padding: 0.25em 1em;
+    margin: 0.5em 0;
+    color: #ccc;
+}
+.theme-bucket .pagination li a {
+    color: #ccc;
+}
+.theme-bucket .pagination .prev {
+    position: absolute;
+    left: 0em;
+}
+.theme-bucket .pagination .prev:before {
+    content: "\00AB ";
+}
+.theme-bucket .pagination .next {
+    position: absolute;
+    right: 0em;
+}
+.theme-bucket .pagination .next:after {
+    content: " \00BB";
+}
+.theme-bucket #entries {
+    padding: 0em 0em 0em 0em;
+    margin: 0;
+}
+.theme-bucket #entries .date_header {
+    list-style-type: none;
+    background: #222;
+    color: #ccc;
+    font-family: monospace;
+    text-align: center;
+    padding: 1em 2em 1em 2em;
+    margin: 0 0 0 0;
+}
+.theme-bucket #entries .date_header h3 {
+    padding: 0; margin: 0;
+    font-size: 130%;
+    font-weight: normal;
+}
+.theme-bucket #entries .date_header h3 a {
+    color: #ccc;
+    text-decoration: none;
+}
+.theme-bucket #entries .entry {
+    position: relative;
+}
+.theme-bucket #entries .entry .title {
+    border-bottom: 1px solid #999;
+    margin: 0 0 0.125em 0;
+}
+.theme-bucket #entries .entry .title a {
+    font-weight: bold;
+}
+.theme-bucket #entries .entry .comments {
+   position: absolute;
+   top: 1em;
+   right: 2.5em;
+   font-size: 80%;
+   padding-left: 2em;
+}
+.theme-bucket #entries .entry {
+    list-style-type: none;
+    padding: 1em 2em 1em 2em;
+}
+.theme-bucket #entries .entry .body > ul {
+    padding-left: 0em;
+}
+.theme-bucket #entries .entry .body > ul > li {
+    list-style-type: none;
+    padding-left: 36px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px dotted #aaa;
+    background: transparent url(../img/bullet-espresso.gif) no-repeat left 1.125em;
+}
+.theme-bucket #entries .entry .body > ul > li.last {
+    border-bottom: none;
+}
+.theme-bucket #entries .entry .body > ul > li.only {
+    background: transparent url(../img/bullet-espresso.gif) no-repeat left 0.5em;
+}
+.theme-bucket #entries .entry .body > ul > li >ul {
+    margin-bottom: 0.5em;
+}
+.theme-bucket #entries .entry ul, .theme-bucket #entries .entry ol {
+    padding-left: 2.25em;
+}
+.theme-bucket #entries .entry ul li {
+    list-style-type: square;
+}
+.theme-bucket #entries .entry ol li {
+    list-style-type: decimal-leading-zero;
+}
+.theme-bucket #entries .entry p {
+    padding: 0 0 0 0;
+    margin:  0.5em 0 0.75em 0;
+}
+.theme-bucket #entries .entry .title a, .theme-bucket #entries .entry .title a:link, .theme-bucket #entries .entry .title a:visited {
+    color: black;
+    text-decoration: none;
+    border-bottom: 0;
+}
+.theme-bucket #entries .entry a {
+    text-decoration: none;
+    font-weight: normal;
+    color: blue;
+}
+.theme-bucket #entries .entry a:link {
+    border-bottom: 2px solid #aaa;
+}
+.theme-bucket #entries .entry a:visited {
+    border-bottom: 2px solid #ccc;
+}
+.theme-bucket #entries .entry a:hover {
+    border-bottom: 2px solid #999;
+}
+.theme-bucket #entries .entry a:active {
+
+}
+.theme-bucket #entries .entry pre {
+    font-size: 80%;
+    padding: 1em 2em 1em 2em;
+    background: #eee;
+}
+.theme-bucket #entries .entry hr {
+    padding: 0.125em;
+    margin:  2em -1.25em 2em -1.25em;
+    background: #222
+}
+.theme-bucket #footer {
+    margin: 1em 0 0 0;
+    padding: 1em 2em 1em 2em;
+    background: #222;
+    color: #ccc;
+}
