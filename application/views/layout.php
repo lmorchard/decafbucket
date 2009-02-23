@@ -18,7 +18,7 @@
                 <?php echo $content ?>
             </div>
             <div id="footer">
-                <script type="text/javascript" src="http://disqus.com/forums/decafbad-bucket/embed.js"></script><noscript><a href="http://decafbad-bucket.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<script type="text/javascript" src="http://disqus.com/forums/<?= Kohana::config('config.disqus_shortname') ?>/embed.js"></script><noscript><a href="http://<?= Kohana::config('config.disqus_shortname') ?>.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
             </div>
         </div>
         <script type="text/javascript">
@@ -31,7 +31,7 @@
                         query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
                     }
                 }
-                document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/decafbad-bucket/get_num_replies.js' + query + '"></' + 'script>');
+                document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/<?= Kohana::config('config.disqus_shortname') ?>/get_num_replies.js' + query + '"></' + 'script>');
             })();
         //]]>
         </script>
