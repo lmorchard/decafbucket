@@ -152,6 +152,9 @@
     margin:  2em -1.25em 2em -1.25em;
     background: #222
 }
+.theme-bucket #entries .entry #disqus_thread {
+    padding-top: 1.5em;
+}
 .theme-bucket #footer {
     background: #222;
     color: #ccc;
