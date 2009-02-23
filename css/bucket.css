@@ -33,6 +33,7 @@
     position: relative;
 }
 .theme-bucket .pagination {
+    margin: 0;
     list-style-type: none;
     background: #222;
     font-family: monospace;
