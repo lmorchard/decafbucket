@@ -28,8 +28,8 @@ spl_autoload_register(array('Memex_Autoloader', 'auto_load'));
 
 $path = array(
     APPPATH,
-    APPPATH . '/libraries',
-    APPPATH . '/vendor',
+    APPPATH . 'libraries',
+    APPPATH . 'vendor',
     get_include_path()
 );
 set_include_path(implode(PATH_SEPARATOR, $path));
