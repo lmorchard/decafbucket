@@ -1,15 +1,15 @@
 .theme-bucket {
-    background: #222;
+    background: #111;
     font: 14px Georgia;
     line-height: 1.45em;
 }
 .theme-bucket #wrapper {
     margin: 0 auto 0 auto;
     width: 510px;
-    background: #222;
+    background: #111;
 }
 .theme-bucket #header {
-    background: #222 url(../img/growup.jpg) no-repeat 150px bottom;
+    background: #111 url(../img/growup.jpg) no-repeat 150px bottom;
     height: 141px;
 }
 .theme-bucket #header a {
@@ -32,7 +32,7 @@
 .theme-bucket .pagination {
     margin: 0.5em 0 -1.5em 0;
     list-style-type: none;
-    background: #222;
+    background: #111;
     font-family: monospace;
     height: 2em;
 }
@@ -150,7 +150,7 @@
 .theme-bucket #entries .entry hr {
     padding: 0.125em;
     margin:  2em -1.25em 2em -1.25em;
-    background: #222
+    background: #111
 }
 .theme-bucket #entries .entry #disqus_thread {
     padding-top: 1.5em;
