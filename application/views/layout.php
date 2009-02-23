@@ -6,7 +6,7 @@
         <script type="text/javascript" src="<?= url::base() ?>js/mootools-1.2.1-core-yc.js"></script>
         <script type="text/javascript" src="<?= url::base() ?>js/mootools-1.2-more.js"></script>
         <script type="text/javascript" src="<?= url::base() ?>js/bucket.js"></script>
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="<?= url::base() ?>?feed=atom" />
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="<?= url::base() ?>index.atom" />
         <title><?= out::H(Kohana::config('Config.site_title')) ?></title>
     </head>
     <body class="theme-bucket">
