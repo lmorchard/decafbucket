@@ -180,6 +180,7 @@ class Entries_Model /* extends Model */
 
         $exts = "{" . join(",", array_keys($this->formatter_map)) . "}";
         $files = glob("{$this->path}/{$date}/*.{$exts}", GLOB_BRACE);
+        rsort($files);
         
         $raw = array();
         $html = array();

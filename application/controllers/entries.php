@@ -32,14 +32,24 @@ class Entries_Controller extends Controller {
             'entries'    => $entries
         ));
 
+        switch (Router::$current_uri) {
+            case 'index.rss':
+                $_GET['feed'] = 'rss'; break;
+            case 'index.atom':
+                $_GET['feed'] = 'atom'; break;
+        }
+
         if (isset($_GET['feed'])) {
             $this->layout = '';
             switch ($_GET['feed']) {
+                case 'rss':
+                    $this->view = 'entries/feed_rss'; break;
                 case 'atom':
                 default:
                     $this->view = 'entries/feed_atom'; break;
             }
         }
+
 	}
 
     public function single($yr, $mo, $da)

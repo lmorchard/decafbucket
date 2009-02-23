@@ -1,8 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-$config['site_title']    = '0xDECAFBAD Bucket';
-$config['site_subtitle'] = 'random thoughts, accumulated daily';
-
+$config['site_title']        = '0xDECAFBAD Bucket';
+$config['site_subtitle']     = 'random thoughts, accumulated daily';
 $config['site_author_name']  = 'l.m.orchard';
 $config['site_author_email'] = 'l.m.orchard@pobox.com';
 $config['site_author_url']   = 'http://decafbad.com/bucket/';
