@@ -18,9 +18,10 @@
                 <?php echo $content ?>
             </div>
             <div id="footer">
-<script type="text/javascript" src="http://disqus.com/forums/<?= Kohana::config('config.disqus_shortname') ?>/embed.js"></script><noscript><a href="http://<?= Kohana::config('config.disqus_shortname') ?>.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                Source code for this bucket available at <a href="http://github.com/lmorchard/decafbucket/tree/master">GitHub</a>. Share and Enjoy.
             </div>
         </div>
+        <script type="text/javascript" src="http://disqus.com/forums/<?= Kohana::config('config.disqus_shortname') ?>/embed.js"></script>
         <script type="text/javascript">
         //<![CDATA[
         (function() {
