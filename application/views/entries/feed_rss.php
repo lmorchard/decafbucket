@@ -11,8 +11,8 @@ $x->rss(array(
         'xmlns:atom' => 'http://www.w3.org/2005/Atom'
     ))
     ->channel()
-        ->title(Kohana::config('Config.site_title'))
-        ->description(Kohana::config('Config.site_subtitle'))
+        ->title(Kohana::config('config.site_title'))
+        ->description(Kohana::config('config.site_subtitle'))
         ->pubDate(date('r', $entries[0]['date'] + ( 60 * 60 * 24 - 60 )))
         ->link($site_base)
         ->element('atom:link', array(
@@ -21,8 +21,8 @@ $x->rss(array(
             'href' => $site_base . url::current(TRUE) 
         ))
         ->managingEditor(
-            Kohana::config('Config.site_author_name') .
-            '<'.Kohana::config('Config.site_author_email').'>'
+            Kohana::config('config.site_author_name') .
+            '<'.Kohana::config('config.site_author_email').'>'
         );
 
 foreach ($entries as $entry) {

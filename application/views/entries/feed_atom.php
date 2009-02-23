@@ -8,8 +8,8 @@ $x = new Memex_XmlWriter(array(
 
 $x->feed(array('xmlns'=>'http://www.w3.org/2005/Atom'))
     ->id($site_base . url::current(TRUE))
-    ->title(Kohana::config('Config.site_title'))
-    ->subtitle(Kohana::config('Config.site_subtitle'))
+    ->title(Kohana::config('config.site_title'))
+    ->subtitle(Kohana::config('config.site_subtitle'))
     ->updated(date('c', $entries[0]['date'] + ( 60 * 60 * 24 - 60 )))
     ->link(array(
         'rel'  => 'alternate', 
@@ -17,9 +17,9 @@ $x->feed(array('xmlns'=>'http://www.w3.org/2005/Atom'))
         'href' => $site_base
     ))
     ->author()
-        ->name(Kohana::config('Config.site_author_name'))
-        ->email(Kohana::config('Config.site_author_email'))
-        ->url(Kohana::config('Config.site_author_url'))
+        ->name(Kohana::config('config.site_author_name'))
+        ->email(Kohana::config('config.site_author_email'))
+        ->url(Kohana::config('config.site_author_url'))
     ->pop()
     ;
 

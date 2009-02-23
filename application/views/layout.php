@@ -7,12 +7,12 @@
         <script type="text/javascript" src="<?= url::base() ?>js/mootools-1.2-more.js"></script>
         <script type="text/javascript" src="<?= url::base() ?>js/bucket.js"></script>
         <link rel="alternate" type="application/atom+xml" title="RSS" href="<?= url::base() ?>index.atom" />
-        <title><?= out::H(Kohana::config('Config.site_title')) ?></title>
+        <title><?= out::H(Kohana::config('config.site_title')) ?></title>
     </head>
     <body class="theme-bucket">
         <div id="wrapper">
             <div id="header">
-            <a href="<?= url::base() ?>"><h1 class="title"><?= out::H(Kohana::config('Config.site_title')) ?></h1></a>
+            <a href="<?= url::base() ?>"><h1 class="title"><?= out::H(Kohana::config('config.site_title')) ?></h1></a>
             </div>
             <div id="content">
                 <?php echo $content ?>
