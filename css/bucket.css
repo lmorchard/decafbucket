@@ -33,8 +33,6 @@
     position: relative;
 }
 .theme-bucket .pagination {
-    padding: 0;
-    margin: 0;
     list-style-type: none;
     background: #222;
     font-family: monospace;
@@ -171,8 +169,6 @@
     background: #222
 }
 .theme-bucket #footer {
-    margin: 1em 0 0 0;
-    padding: 1em 2em 1em 2em;
     background: #222;
     color: #ccc;
 }
