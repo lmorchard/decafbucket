@@ -89,6 +89,8 @@
    top: 1em;
    font-size: 80%;
    z-index: 999;
+   padding-left: 20px;
+   background: transparent url(../img/icon_reaction.gif) no-repeat left 0.25em;
 }
 .theme-bucket #entries .entry .body > ul {
     padding-left: 0em;

@@ -8,6 +8,6 @@
 </ul>
 <ul id="entries">
     <?php View::factory('entries/entry', array(
-        'entry' => $entry
+        'entry' => $entry, 'show_thread' => true
     ))->render(true) ?>
 </ul>

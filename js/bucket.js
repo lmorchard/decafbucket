@@ -26,7 +26,7 @@ var Bucket = function() {
         onReady: function() {
 
             this.tweakSomeContent();
-            this.injectHaloscanComments();
+            //this.injectHaloscanComments();
 
         },
 
