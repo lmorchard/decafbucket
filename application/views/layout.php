@@ -7,7 +7,7 @@
         <script type="text/javascript" src="<?= url::base() ?>js/mootools-1.2-more.js"></script>
         <script type="text/javascript" src="<?= url::base() ?>js/bucket.js"></script>
         <link rel="alternate" type="application/atom+xml" title="RSS" href="<?= url::base() ?>index.atom" />
-        <title><?= out::H(Kohana::config('config.site_title')) ?></title>
+        <title><?= slot::output('page_title') ?><?php if (slot::exists('page_title')): ?> - <?php endif ?><?= out::H(Kohana::config('config.site_title')) ?></title>
     </head>
     <body class="theme-bucket">
         <div id="wrapper">
