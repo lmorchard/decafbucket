@@ -14,7 +14,7 @@ cat <<EOF >$NOW_FN;
 
 * This space left unintentionally blank.
 
-/* vim: set formatoptions=l lbr syntax=mkd: */
+/* vim: set wrap wm=5 syntax=mkd textwidth=70: */
 EOF
 
 open $NOW_FN;

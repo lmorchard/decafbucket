@@ -16,7 +16,7 @@ class Entries_Controller extends Controller {
 	public function index()
     {
         $start   = isset($_GET['start']) ? $_GET['start'] : 0;
-        $count   = isset($_GET['count']) ? $_GET['count'] : 5;
+        $count   = isset($_GET['count']) ? $_GET['count'] : 7;
         $total   = $this->entries_model->getEntryCount();
         $entries = $this->entries_model->getEntries($start, $count);
 

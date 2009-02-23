@@ -68,7 +68,7 @@ var Bucket = function() {
                     this.buildHaloscanCommentLink(permalink_id, comment_count);
 
                 // Inject the comment link into the permalink parent.
-                permalink.parentNode.grab(
+                permalink.parentNode.parentNode.grab(
                     document
                         .newElement('span', { 'class': 'comments' })
                         .adopt(

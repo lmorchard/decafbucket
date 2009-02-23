@@ -190,11 +190,14 @@ class Entries_Model /* extends Model */
 
             $ext = pathinfo($fn, PATHINFO_EXTENSION);
             if (isset($this->formatter_map[$ext])) {
+                
                 $ct = $this->filterContent(file_get_contents($fn));
                 $raw[$fn] = $ct;
-                $html[] = call_user_func(
+
+                $ct_html = call_user_func(
                     array($this, $this->formatter_map[$ext]), $ct
                 ); 
+                $html[] = $ct_html;
             }
         }
 
@@ -231,12 +234,12 @@ class Entries_Model /* extends Model */
     {
         $lines = array_filter( 
             explode("\n", $raw),
-            array($this, 'filterLine')
+            array($this, 'filterContentLine')
         );
         return join("\n", $lines);
     }
 
-    public function filterLine($line)
+    public function filterContentLine($line)
     {
         return (
             strpos($line, '/* ') !== 0 &&

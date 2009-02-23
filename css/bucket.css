@@ -1,6 +1,3 @@
-/**
- *
- */
 .theme-bucket {
     background: #222;
     font: 14px Georgia;
@@ -9,7 +6,7 @@
 .theme-bucket #wrapper {
     margin: 0 auto 0 auto;
     width: 510px;
-    background: #fefefe;
+    background: #222;
 }
 .theme-bucket #header {
     background: #222 url(../img/growup.jpg) no-repeat 150px bottom;
@@ -33,7 +30,7 @@
     position: relative;
 }
 .theme-bucket .pagination {
-    margin: 0;
+    margin: 0.5em 0 -1.5em 0;
     list-style-type: none;
     background: #222;
     font-family: monospace;
@@ -41,7 +38,6 @@
 }
 .theme-bucket .pagination li {
     padding: 0.25em 1em;
-    margin: 0.5em 0;
     color: #ccc;
 }
 .theme-bucket .pagination li a {
@@ -65,44 +61,34 @@
     padding: 0em 0em 0em 0em;
     margin: 0;
 }
-.theme-bucket #entries .date_header {
-    list-style-type: none;
-    background: #222;
-    color: #ccc;
-    font-family: monospace;
-    text-align: center;
-    padding: 1em 2em 1em 2em;
-    margin: 0 0 0 0;
-}
-.theme-bucket #entries .date_header h3 {
-    padding: 0; margin: 0;
-    font-size: 130%;
-    font-weight: normal;
-}
-.theme-bucket #entries .date_header h3 a {
-    color: #ccc;
-    text-decoration: none;
-}
 .theme-bucket #entries .entry {
     position: relative;
+    background: #fefefe;
+    list-style-type: none;
+    margin: 2em 0em 0em 0em;
+    padding: 1em 2em 2em 2em;
 }
 .theme-bucket #entries .entry .title {
     border-bottom: 1px solid #999;
-    margin: 0 0 0.125em 0;
+    color: #666;
+    font-family: monospace;
+    margin: 0 0 0.5em 0;
+    padding: 0 0 0 0;
 }
 .theme-bucket #entries .entry .title a {
     font-weight: bold;
 }
+.theme-bucket #entries .entry .title a, .theme-bucket #entries .entry .title a:link, .theme-bucket #entries .entry .title a:visited {
+    color: #666;
+    text-decoration: none;
+    border-bottom: 0;
+}
 .theme-bucket #entries .entry .comments {
    position: absolute;
-   top: 1em;
    right: 2.5em;
+   top: 1em;
    font-size: 80%;
-   padding-left: 2em;
-}
-.theme-bucket #entries .entry {
-    list-style-type: none;
-    padding: 1em 2em 1em 2em;
+   z-index: 999;
 }
 .theme-bucket #entries .entry .body > ul {
     padding-left: 0em;
@@ -136,11 +122,6 @@
 .theme-bucket #entries .entry p {
     padding: 0 0 0 0;
     margin:  0.5em 0 0.75em 0;
-}
-.theme-bucket #entries .entry .title a, .theme-bucket #entries .entry .title a:link, .theme-bucket #entries .entry .title a:visited {
-    color: black;
-    text-decoration: none;
-    border-bottom: 0;
 }
 .theme-bucket #entries .entry a {
     text-decoration: none;
