@@ -15,7 +15,9 @@ class Entries_Model /* extends Model */
         'txt'      => 'formatMarkdown',
         'md'       => 'formatMarkdown',
         'markdown' => 'formatMarkdown',
+        'tx'       => 'formatTextile',
         'textile'  => 'formatTextile',
+        'opml'     => 'formatOPML',
         'html'     => 'formatPassthrough'
     );
 
@@ -25,6 +27,7 @@ class Entries_Model /* extends Model */
     public function __construct()
     {
         $this->path = Kohana::config('model.entries_path');
+        $this->exts = "{" . join(",", array_keys($this->formatter_map)) . "}";
     }
 
     /**
@@ -56,6 +59,20 @@ class Entries_Model /* extends Model */
     }
 
     /**
+     * For a directory to a month in a year, remove the path and year from the 
+     * front.
+     *
+     * @param string absolute path to month directory
+     * @return string month directory
+     */
+    private function removePathAndYear($fn)
+    {
+        $fn = str_replace($this->path.'/', '', $fn);
+        list($undef, $mo) = explode('/', $fn, 2);
+        return $mo;
+    }
+
+    /**
      * Get a list of days for a month in a year.
      *
      * @param string Year in which to look for months, defaults to current year.
@@ -66,8 +83,8 @@ class Entries_Model /* extends Model */
     {
         if (!is_numeric($yr)) $yr = date('Y');
         if (!is_numeric($mo)) $yr = date('m');
-        $files = glob("{$this->path}/{$yr}/{$mo}/*", GLOB_ONLYDIR);
-        $das = array_map(array($this, 'extractDayFromPath'), $files);
+        $files = glob("{$this->path}/{$yr}/{$mo}/*");
+        $das = array_map(array($this, 'convertPathIntoDate'), $files);
         rsort($das);
         return $das;
     }
@@ -79,8 +96,8 @@ class Entries_Model /* extends Model */
      */
     public function getDates()
     {
-        $dirs = glob($this->path . '/*/*/*', GLOB_ONLYDIR);
-        $dates = array_map(array($this, 'removePath'), $dirs);
+        $dirs = glob($this->path . '/*/*/*');
+        $dates = array_map(array($this, 'convertPathIntoDate'), $dirs);
         return $dates;
     }
 
@@ -131,8 +148,13 @@ class Entries_Model /* extends Model */
         if (!is_numeric($da)) $da = '*';
 
         $dates = array_map(
-            array($this, 'removePath'),
-            glob("{$this->path}/{$yr}/{$mo}/{$da}")
+            array($this, 'convertPathIntoDate'),
+            array_merge(
+                // HACK: Need to get both directories of entries, as well as 
+                // single-day entry files.
+                glob("{$this->path}/{$yr}/{$mo}/{$da}"),
+                glob("{$this->path}/{$yr}/{$mo}/{$da}.{$this->exts}")
+            )
         );
         rsort($dates);
 
@@ -147,14 +169,42 @@ class Entries_Model /* extends Model */
     }
 
     /**
+     * Take an absolute path, either to a day's directory or a day's entry file 
+     * and convert into a yyyy/mm/dd date.
+     *
+     * @param string absolute path
+     * @return string a date in yyyy/mm/dd format
+     */
+    private function convertPathIntoDate($fn)
+    {
+        $fn = $this->removePath($fn);
+        return substr($fn, 0, 10);
+    }
+
+    /**
+     * Snip the current entries path from the front of an absolute path.
+     *
+     * @param string an absolute path
+     * @return string the relative path
+     */
+    private function removePath($fn)
+    {
+        return str_replace($this->path.'/', '', $fn);
+    }
+
+    /**
      * Get a count of available entries
      *
      * @param numeric count of entries
      */
     public function getEntryCount()
     {
-        $exts = "{" . join(",", array_keys($this->formatter_map)) . "}";
-        $files = glob("{$this->path}/*/*/*/*.{$exts}", GLOB_BRACE);
+        $files = array_merge(
+            // HACK: Need to get both directories of entries, as well as 
+            // single-day entry files.
+            glob("{$this->path}/*/*/*/*.{$this->exts}", GLOB_BRACE),
+            glob("{$this->path}/*/*/*.{$this->exts}", GLOB_BRACE)
+        );
         return count( $files );
     }
 
@@ -178,8 +228,12 @@ class Entries_Model /* extends Model */
         if (isset($this->_entry_cache[$date]))
             return $this->_entry_cache[$date];
 
-        $exts = "{" . join(",", array_keys($this->formatter_map)) . "}";
-        $files = glob("{$this->path}/{$date}/*.{$exts}", GLOB_BRACE);
+        $files = array_merge(
+            // HACK: Need to get both directories of entries, as well as 
+            // single-day entry files.
+            glob("{$this->path}/{$date}/*.{$this->exts}", GLOB_BRACE),
+            glob("{$this->path}/{$date}.{$this->exts}", GLOB_BRACE)
+        );
         rsort($files);
         
         $raw = array();
@@ -191,13 +245,10 @@ class Entries_Model /* extends Model */
             $ext = pathinfo($fn, PATHINFO_EXTENSION);
             if (isset($this->formatter_map[$ext])) {
                 
-                $ct = $this->filterContent(file_get_contents($fn));
-                $raw[$fn] = $ct;
-
-                $ct_html = call_user_func(
+                $raw[$fn] = $ct = file_get_contents($fn);
+                $html[] = call_user_func(
                     array($this, $this->formatter_map[$ext]), $ct
                 ); 
-                $html[] = $ct_html;
             }
         }
 
@@ -213,58 +264,108 @@ class Entries_Model /* extends Model */
             );
     }
 
+    /**
+     * Format raw text as HTML using Markdown
+     *
+     * @param string raw text
+     * @param string formatted HTML
+     */
     public function formatMarkdown($raw)
     {
         require_once 'Markdown.php';
-        return Markdown($raw);
+        return Markdown($this->filterComments($raw));
     }
 
+    /**
+     * Format raw text as HTML using Textile
+     *
+     * @param string raw text
+     * @param string formatted HTML
+     */
     public function formatTextile($raw)
     {
         $t = new Textile();
-        return $t->TextileThis($raw);
+        return $t->TextileThis($this->filterComments($raw));
     }
 
+    /**
+     * Format raw text as HTML using nothing
+     *
+     * @param string raw text
+     * @param string formatted HTML
+     */
     public function formatPassthrough($raw)
     {
         return $raw;
     }
 
-    public function filterContent($raw)
+    /**
+     * Format raw OPML as HTML using an XSL stylesheet
+     *
+     * @param string raw OPML
+     * @param string formatted HTML
+     */
+    public function formatOPML($raw)
+    {
+        $doc = simplexml_load_string($raw);
+        return $this->_formatOutlineNode($doc->body);
+    }
+
+    /**
+     * Format the outline children of a parsed OPML node.
+     * Recursively called to format an entire outline.
+     *
+     * @param SimpleXMLElement parent outline node
+     * @param text formatted HTML.
+     */
+    public function _formatOutlineNode($node)
+    {
+        if (empty($node)) return '';
+
+        $out = array();
+        $out[] = '<ul>';
+        foreach ($node->outline as $outline) {
+            $out[] = '<li>';
+            if (!empty($outline['text'])) {
+                $out[] = '<p>' . $outline['text'] . '</p>';
+                // TODO: inject permalinks based on date/time or derived title.
+            }
+            if (count($outline->outline)) {
+                $out[] = $this->_formatOutlineNode($outline);
+            }
+            $out[] = '</li>';
+        }
+        $out[] = '</ul>';
+        return join("\n", $out);
+    }
+
+    /**
+     * Filter comments from raw text, eg. lines starting with // and /*
+     *
+     * @param string raw text
+     * @return string text filtered for comments
+     */
+    public function filterComments($raw)
     {
         $lines = array_filter( 
             explode("\n", $raw),
-            array($this, 'filterContentLine')
+            array($this, 'filterCommentLine')
         );
         return join("\n", $lines);
     }
 
-    public function filterContentLine($line)
+    /**
+     * Determine whether a line contains a comment.
+     *
+     * @param string raw text line
+     * @return boolean whether or not the line is a comment
+     */    
+    public function filterCommentLine($line)
     {
         return (
             strpos($line, '/* ') !== 0 &&
             strpos($line, '// ') !== 0
         );
-    }
-
-    private function extractDayFromPath($fn)
-    {
-        $fn = str_replace($this->path.'/', '', $fn);
-        $parts = explode('/', $fn);
-        $name = array_pop($parts);
-        return $name;
-    }
-
-    private function removePathAndYear($fn)
-    {
-        $fn = str_replace($this->path.'/', '', $fn);
-        list($undef, $mo) = explode('/', $fn, 2);
-        return $mo;
-    }
-
-    private function removePath($fn)
-    {
-        return str_replace($this->path.'/', '', $fn);
     }
 
 }
