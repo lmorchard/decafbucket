@@ -142,6 +142,11 @@
 .theme-bucket #entries .entry a:active {
 
 }
+.theme-bucket #entries .entry blockquote {
+    font-style: italic;
+    padding: 0.25em 1em;
+    border-left: 4px solid #ccc;
+}
 .theme-bucket #entries .entry pre {
     font-size: 80%;
     padding: 1em 2em 1em 2em;
@@ -155,6 +160,7 @@
 .theme-bucket #entries .entry #disqus_thread {
     padding-top: 1.5em;
 }
+
 .theme-bucket #footer {
     background: #fefefe;
     margin: 2em 0 0 0;
